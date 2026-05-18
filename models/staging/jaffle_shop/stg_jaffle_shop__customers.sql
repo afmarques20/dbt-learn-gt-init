@@ -1,6 +1,17 @@
+with source as (
+    
+    select * from {{ source('jaffle_shop', 'customers') }}
+
+), 
+
+transformed (
+
     select
         id as customer_id,
-        first_name,
-        last_name
+        first_name as customer_first_name,
+        last_name as customer_last_name
+    from source
+    
+)
 
-    from {{ source('jaffle_shop', 'customers') }}
+select * from transformed
